@@ -1,5 +1,6 @@
+"use client"
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 
 
@@ -11,6 +12,14 @@ type HeroSectionProps = {
 
 
 const HeroSection = ({}:HeroSectionProps) => {
+   const [visible,setVisible]=useState(true);
+   useEffect(()=>{
+    const interval = setInterval(()=>{
+      setVisible((prev)=>!prev);
+    },500);
+    return ()=>clearInterval(interval);
+   },[]);
+
 return <>
  <div className="flex flex-col items-center relative gap-12 py-20">
               <div className="h-screen w-[1px] bg-gray-300 fixed left-0 top-0 z-10"/>
@@ -21,12 +30,21 @@ return <>
             </div>
             <div className="flex flex-col items-center gap-6 justify-center">
               <div className="flex flex-col items-center">
-                  <h2 className="text-6xl font-semibold items-center">Magically simplify </h2>
-                <h2 className="text-6xl font-semibold items-center"> accounting and taxes</h2>
+                  <h2 className="text-6xl font-semibold items-center tracking-tight">Magically simplify </h2>
+                <h2 className="text-6xl font-semibold items-center tracking-tight"> accounting and taxes</h2>
               </div>
                 <div className="flex flex-col items-center">
                     <p className="font-light tracking-tighter text-xl text-gray-700">Automated bookkeeping, effortless tax filing, real‑time insights. </p>
-                <p className="font-light tracking-tighter text-xl text-gray-700">Set up in 10 mins. Back to building by 11:14am.</p>
+                <p className="font-light tracking-tighter text-xl text-gray-700">Set up in 10 mins. Back to building by 11
+                  <span 
+                  style={{
+                    opacity:visible?1:0,
+                    transition :"opacity 0.3s ease-in-out"
+                  }}
+                  >
+                      : 
+                  </span>
+                  14am.</p>
                 </div>
             <div className="flex gap-2 relative z-20">
                  <button className="bg-blue-500 shadow-lg text-white text-shadow-2xs p-2 font-bold text-sm px-4 rounded-lg hover:bg-blue-600 hover:shadow-xl transition-all duration-200 ease-in-out cursor-pointer transform hover:scale-105 relative z-10">Get Started</button>
